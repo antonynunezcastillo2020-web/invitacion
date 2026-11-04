@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Invitación de cumpleaños</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#161f29;--card:#1f2a37;--text:#f2fbfb;--muted:#aee2e2;--line:#475266;--a:#2b8dc8;--b:#2bcac8;--btn-text:#161f29}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161f29;--card:#1f2a37;--text:#f2fbfb;--muted:#aee2e2}}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eefafa;--card:#ffffff;--text:#161f29;--muted:#475266;--line:#aee2e2}}
+:root[data-theme="dark"]{--bg:#161f29;--card:#1f2a37;--text:#f2fbfb;--muted:#aee2e2}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);font-family:'Poppins',system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden}
+section{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:48px 24px;position:relative}
+h1{font-size:clamp(2.6rem,13vw,4.5rem);line-height:1.05;font-weight:800;background:linear-gradient(135deg,var(--a),var(--b),#aee2e2);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:1.9rem;font-weight:700;margin-bottom:14px}
+p{max-width:420px;color:var(--muted)}
+.tag{letter-spacing:.3em;text-transform:uppercase;font-size:.75rem;color:var(--b);margin-bottom:14px}
+.emoji{font-size:3.2rem;margin-bottom:10px}
+.hero{background:radial-gradient(circle at 50% 20%,rgba(43,141,200,.35),transparent 60%),radial-gradient(circle at 80% 90%,rgba(43,202,200,.25),transparent 55%),var(--bg)}
+.date{margin-top:20px;font-size:1.3rem;font-weight:600;color:var(--text)}
+.count{display:flex;gap:10px;margin-top:22px}
+.count div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 0;width:68px}
+.count b{display:block;font-size:1.5rem;color:var(--b)}
+.count span{font-size:.65rem;text-transform:uppercase;color:var(--muted)}
+.scroll{position:absolute;bottom:22px;font-size:.8rem;color:var(--muted);animation:bob 1.6s infinite}
+@keyframes bob{50%{transform:translateY(8px)}}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px;width:100%;max-width:380px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 8px;font-weight:600;font-size:.9rem;color:var(--text)}
+.item i{display:block;font-style:normal;font-size:2rem;margin-bottom:4px}
+.btn{display:inline-block;margin-top:26px;padding:15px 34px;border-radius:999px;border:0;font:600 1rem inherit;font-family:inherit;color:var(--btn-text);background:linear-gradient(135deg,var(--b),var(--a));text-decoration:none;box-shadow:0 8px 24px rgba(43,141,200,.4);cursor:pointer}
+.btn:active{transform:scale(.97)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 22px;margin-top:20px;color:var(--text);font-weight:600}
+.card small{display:block;color:var(--muted);font-weight:400}
+form{width:100%;max-width:380px;margin-top:20px;display:flex;flex-direction:column;gap:12px}
+input{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);font:1rem inherit;font-family:inherit}
+input:focus{outline:2px solid var(--b)}
+.rev{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+.rev.on{opacity:1;transform:none}
+footer{padding:30px 24px;text-align:center;font-size:.8rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}.scroll{animation:none}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="tag rev">Estás invitado</div>
+  <h1 class="rev">¡Mis 20<br>Años!</h1>
+  <div class="date rev">🎉 27 de noviembre</div>
+  <div class="count rev" id="count"></div>
+  <div class="scroll">Desliza ↓</div>
+</section>
+
+<section>
+  <div class="emoji rev">💌</div>
+  <h2 class="rev">Quiero celebrarlo contigo</h2>
+  <p class="rev">Este año quiero festejar rodeado de la gente que más quiero. Habrá risas, comida, música y mucha diversión. ¡No puedes faltar!</p>
+  <div class="grid rev">
+    <div class="item"><i>🏡</i>Casa quinta</div>
+    <div class="item"><i>🏊</i>Piscina</div>
+    <div class="item"><i>🔥</i>Churrasquera</div>
+    <div class="item"><i>🎱</i>Mesa de billar</div>
+    <div class="item" style="grid-column:span 2"><i>🎲</i>Juegos de mesa</div>
+  </div>
+</section>
+
+<section>
+  <div class="emoji rev">📍</div>
+  <h2 class="rev">¿Dónde es?</h2>
+  <p class="rev">Nos vemos en la casa quinta. Toca el botón y te llevo directo al lugar.</p>
+  <div class="card rev"><span id="lugar">Casa Quinta</span><small id="hora">27 de noviembre · Hora por confirmar</small></div>
+  <a class="btn rev" id="btnMapa" target="_blank" rel="noopener">Ver ubicación 🗺️</a>
+</section>
+
+<section>
+  <div class="emoji rev">✅</div>
+  <h2 class="rev">¿Vienes?</h2>
+  <p class="rev">Confírmame tu asistencia llenando un formulario rápido para saber cuántos seremos.</p>
+  <a class="btn rev" id="btnForm" target="_blank" rel="noopener">Confirmar asistencia</a>
+  <p class="rev" style="margin-top:14px;font-size:.85rem">Trae traje de baño y ganas de pasarla bien 🩳</p>
+</section>
+
+<section>
+  <div class="emoji rev">🎶</div>
+  <h2 class="rev">Tú pones la música</h2>
+  <p class="rev">Dime qué canción no puede faltar en la playlist del día y la agrego.</p>
+  <form class="rev" id="songForm">
+    <input id="cancion" placeholder="Canción" required autocomplete="off">
+    <input id="artista" placeholder="Artista" autocomplete="off">
+    <button class="btn" style="margin-top:4px" type="submit">Enviar canción 🎧</button>
+  </form>
+</section>
+
+<footer>¡Te espero! 🥳</footer>
+
+<script>
+/* ====== EDITA AQUÍ ====== */
+const CONFIG = {
+  lugar: "Casa Quinta",
+  hora: "27 de noviembre · 15:00 hs",
+  fecha: "2026-11-27T15:00:00",
+  mapsUrl: "https://www.google.com/maps/place/17%C2%B048'22.8%22S+63%C2%B004'49.8%22W/@-17.8063202,-63.0830612,864m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d-17.8063202!4d-63.0804863?hl=es",
+  formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe1hcr7inP-dgtW53osYoojAsn-JZYLimfFKL3SGqjjEDOmkg/viewform?usp=publish-editor",
+  whatsapp: "59176362077",
+  nombre: "Tu nombre"
+};
+/* ========================= */
+
+document.getElementById('lugar').textContent = CONFIG.lugar;
+document.getElementById('hora').textContent = CONFIG.hora;
+document.getElementById('btnMapa').href = CONFIG.mapsUrl;
+document.getElementById('btnForm').href = CONFIG.formUrl;
+
+document.getElementById('songForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const c = document.getElementById('cancion').value.trim();
+  const a = document.getElementById('artista').value.trim();
+  const msg = '🎶 Mi canción para la playlist: ' + c + (a ? ' – ' + a : '');
+  window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(msg), '_blank');
+});
+
+const cnt = document.getElementById('count');
+function tick(){
+  let d = new Date(CONFIG.fecha) - new Date();
+  if (d < 0) { cnt.innerHTML = '<b style="color:var(--b)">¡Hoy es el gran día! 🎉</b>'; return; }
+  const v = [[Math.floor(d/864e5),'Días'],[Math.floor(d%864e5/36e5),'Horas'],[Math.floor(d%36e5/6e4),'Min'],[Math.floor(d%6e4/1e3),'Seg']];
+  cnt.innerHTML = v.map(x => '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>').join('');
+}
+tick(); setInterval(tick, 1000);
+
+const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('on'); io.unobserve(en.target); } }), {threshold:.2});
+document.querySelectorAll('.rev').forEach((el,i) => { el.style.transitionDelay = (i % 5) * 0.1 + 's'; io.observe(el); });
+</script>
+</body>
+</html>
